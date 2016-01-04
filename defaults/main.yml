@@ -1,0 +1,10 @@
+---
+c5_checkout: no
+c5_repo: "https://github.com/concrete5/concrete5.git"
+c5_version: "HEAD"
+c5_checkout_depth: 1
+c5_install: no
+c5_starting_point: "elemental_full"
+c5_admin_mail: "admin@example.com"
+c5_admin_password: password
+c5_default_locale: "en_US"

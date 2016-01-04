@@ -1,0 +1,52 @@
+---
+- name: Checkout project.
+  git:
+    repo: "{{ c5_repo }}"
+    dest: "{{ beet_root }}"
+    version: "{{ c5_version }}"
+    depth: "{{ c5_checkout_depth }}"
+    recursive: yes
+    update: no
+  when: c5_checkout
+
+- name: Install third party dependencies.
+  shell: >
+    COMPOSER_PROCESS_TIMEOUT=600 {{ composer_path }} install
+    --prefer-source
+    chdir="{{ beet_root }}/web/concrete"
+    creates="{{ beet_root }}/web/concrete/vendor/autoload.php"
+  become: no
+
+- name: Install grunt-cli
+  npm:
+    name: "grunt-cli"
+    global: yes
+
+- name: Install node dependancies.
+  npm:
+    path: "{{ beet_root }}/build"
+
+- name: Build concrete5 sources with grunt.
+  shell: >
+    grunt release
+    chdir="{{ beet_root }}/build"
+
+- name: Install project.
+  command: >
+    ./concrete5 c5:install
+    --db-server=localhost
+    --db-username={{ beet_mysql_user }}
+    --db-password={{ beet_mysql_password }}
+    --db-database={{ beet_mysql_database }}
+    --site={{ beet_site_name }}
+    --starting-point={{ c5_starting_point }}
+    --admin-email={{ c5_admin_mail }}
+    --admin-password={{ c5_admin_password }}
+    --default-locale={{ c5_default_locale }}
+    chdir="{{ beet_root }}/web/concrete/bin"
+  register: c5_installed
+  failed_when: c5_installed.rc != 0 and ("concrete5 is already installed." not in c5_installed.stderr)
+  changed_when: c5_installed.rc == 0
+  notify: restart webserver
+  when: c5_install
+  become: no
