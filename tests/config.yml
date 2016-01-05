@@ -1,0 +1,9 @@
+---
+beet_project: concrete5
+beet_web: "{{ beet_root }}/web"
+c5_checkout: yes
+c5_version: "5.7.5.3"
+c5_install: yes
+c5_admin_mail: "admin@example.com"
+c5_admin_password: password
+php_short_open_tag: yes
