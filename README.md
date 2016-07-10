@@ -1,5 +1,7 @@
 # Ansible Role: Beetbox Concrete5
 
+[![CircleCI](https://circleci.com/gh/beetboxvm/ansible-role-beetbox-concrete5.svg?style=svg)](https://circleci.com/gh/beetboxvm/ansible-role-beetbox-concrete5)
+
 An Ansible role that creates and installs a Concrete5 project on beetbox.
 
 ## Requirements
@@ -46,9 +48,33 @@ Concrete5 locale.
     
     c5_default_locale: "en_US"
 
-## Dependencies
 
-- Beetbox -- https://github.com/drupalmel/beetbox
+# beetbox
+
+https://github.com/beetboxvm/beetbox
+
+## Requirements
+
+* [Vagrant](https://www.vagrantup.com/) >= 1.8
+* [Virtualbox](https://www.virtualbox.org/)
+* [Vagrant Hostsupdater](https://github.com/cogitatio/vagrant-hostsupdater)
+* [Vagrant Auto-network](https://github.com/oscar-stack/vagrant-auto_network)
+
+## Quickstart
+
+  1. Open terminal (or [git bash](https://msysgit.github.io/) for windows users) and run the following commands --
+
+  ```
+  git clone https://github.com/beetboxvm/ansible-role-beetbox-concrete5.git concrete5 && cd $_
+  vagrant up
+  ```
+
+  2. Go to http://concrete5.local/
+
+  ```
+  username: admin
+  password: admin
+  ```
 
 ## License
 

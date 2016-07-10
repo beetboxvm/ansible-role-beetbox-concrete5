@@ -1,5 +1,8 @@
 ---
-beet_root: "home/ubuntu/workspace"
+beet_domain: "concrete5.local"
+beet_root: "{{ beet_base }}/docroot"
+role_path: "{{ beet_home }}/provisioning/ansible/roles/beetboxvm.backdrop"
+
 beet_project: concrete5
 beet_web: "{{ beet_root }}/web"
 c5_checkout: yes
